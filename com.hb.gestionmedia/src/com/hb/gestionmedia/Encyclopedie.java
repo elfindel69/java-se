@@ -56,13 +56,12 @@ public class Encyclopedie extends Media {
 
 	/**
 	 * constructeur avec paramètres
-	 * @param noEnregistrement n° d'enregistrement de l'encyclopédie
 	 * @param titre titre de l'encyclopédie
 	 * @param langue langue de l'encyclopédie
 	 * @param nbVolumes nombre de volumes de l'encyclopédie
 	 */
-	public Encyclopedie(String noEnregistrement, String titre, String langue, int nbVolumes) {
-		super(noEnregistrement,titre);
+	public Encyclopedie(String titre, String langue, int nbVolumes) {
+		super(titre);
 		this.langue = langue;
 		this.nbVolumes = nbVolumes;
 	}

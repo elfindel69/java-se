@@ -7,9 +7,14 @@ package com.hb.gestionmedia;
  */
 public abstract class Media {
 	/**
-	 * numéro d'enregistrement
+	 * id statique auto incrément
 	 */
-	protected String noEnregistrement;
+	private static int sId = 0;
+	
+	/**
+	 * id du média
+	 */
+	protected int id;
 	
 	/**
 	 * titre du média
@@ -20,17 +25,10 @@ public abstract class Media {
 	 * getter noEnregistrement
 	 * @return numéro d'entregistement du media
 	 */
-	public String getNoEnregistrement() {
-		return noEnregistrement;
+	public int getId() {
+		return id;
 	}
-	
-	/**
-	 * setter noEnregistrement
-	 * @param noEnregistrement nouveau numéro d'enregistement
-	 */
-	public void setNoEnregistrement(String noEnregistrement) {
-		this.noEnregistrement = noEnregistrement;
-	}
+
 	
 	/**
 	 * getter titre
@@ -50,18 +48,18 @@ public abstract class Media {
 	
 	/**
 	 * constructeur par défaut
+	 * attribue l'id au Media
 	 */
 	public Media() {
-		
+		id = ++sId;
 	}
 	
 	/**
 	 * constructeur avec paramètres
-	 * @param noEnregistrement numéro d'enregistement
 	 * @param titre titre du media
 	 */
-	public Media(String noEnregistrement, String titre) {
-		this.noEnregistrement = noEnregistrement;
+	public Media(String titre) {
+		this();
 		this.titre = titre;
 	}
 	
@@ -69,7 +67,7 @@ public abstract class Media {
 	 * méthode d'affichage
 	 */
 	public void afficher() {
-		System.out.println("n° d'enregistrement: "+noEnregistrement+",");
+		System.out.println("n° d'enregistrement: "+id+",");
 		System.out.println("titre: "+titre);
 		System.out.println("#####");
 	}

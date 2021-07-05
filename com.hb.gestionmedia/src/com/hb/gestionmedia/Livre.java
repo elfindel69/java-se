@@ -58,13 +58,12 @@ public class Livre extends Media {
 
 	/**
 	 * constructeur avec paramètres
-	 * @param noEnregistrement numéro d'enregistrement du livre
 	 * @param titre titre du livre
 	 * @param auteur auteur du livre
 	 * @param nbPages nombre de pages du livre
 	 */
-	public Livre(String noEnregistrement, String titre, String auteur, int nbPages) {
-		super(noEnregistrement, titre);
+	public Livre(String titre, String auteur, int nbPages) {
+		super(titre);
 		this.auteur = auteur;
 		this.nbPages = nbPages;
 	}

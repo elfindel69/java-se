@@ -58,13 +58,12 @@ public class DVDvideo extends Media {
 
 	/**
 	 * construcrteur avec paramètres
-	 * @param noEnregistrement n° d'enregistrement du DVD
 	 * @param titre titre du DVD
 	 * @param langue langue du DVD
 	 * @param duree durée du DVD
 	 */
-	public DVDvideo(String noEnregistrement, String titre, String langue, int duree) {
-		super(noEnregistrement, titre);
+	public DVDvideo(String titre, String langue, int duree) {
+		super(titre);
 		this.langue = langue;
 		this.duree = duree;
 	}

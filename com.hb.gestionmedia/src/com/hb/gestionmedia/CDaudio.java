@@ -68,14 +68,13 @@ public class CDaudio extends Media{
 
 	/**
 	 * constructeur avec paramètres
-	 * @param noEnregistrement n° d'enregistement du CD
 	 * @param titre titre du CD
 	 * @param nbPistes nombre de pistes du CD
 	 * @param auteur auteur du CD
 	 * @param compositeur compositeur du CD
 	 */
-	public CDaudio(String noEnregistrement, String titre, int nbPistes, String auteur, String compositeur) {
-		super(noEnregistrement, titre);
+	public CDaudio(String titre, String auteur, String compositeur, int nbPistes) {
+		super(titre);
 		this.nbPistes = nbPistes;
 		this.auteur = auteur;
 		this.compositeur = compositeur;
@@ -87,9 +86,9 @@ public class CDaudio extends Media{
 	@Override
 	public void afficher() {
 		super.afficher();
-		System.out.println("nbPistes: "+nbPistes+",");
-		System.out.println("auteur: "+auteur+"");
-		System.out.println("compositeur: "+compositeur);
+		System.out.println("auteur: "+auteur+",");
+		System.out.println("compositeur: "+compositeur+",");
+		System.out.println("nbPistes: "+nbPistes);
 		System.out.println("#####");
 	}
 	
