@@ -135,25 +135,32 @@ public class GestionMediatheque {
 	}
 
 	/**
-	 * méthode de test d'id adhérent
+	 * méthode de récupération d'un adhérent
 	 * @param idAdherent id à tester
-	 * @return id présent?
+	 * @return adherent récupéré
+	 * @throws AdherentNotFoundException id non présent
 	 */
-	public boolean testIdAdherent(int idAdherent) {
+	public Adherent getAdherentById(int idAdherent) throws AdherentNotFoundException {
 		for (Adherent adherent : adherents) {
 			if(adherent.getId() == idAdherent) {
-				return true;
+				return adherent;
 			}
 		}
-		return false;
+		throw new AdherentNotFoundException("adhérent non trouvé:(");
 	}
 
-	public boolean testIdMedia(int idMedia) {
+	/**
+	 * méthode de récupération d'un média
+	 * @param idMedia id à tester
+	 * @return Media récupéré
+	 * @throws MediaNotFoundException id non présent
+	 */
+	public Media getMediaById(int idMedia) throws MediaNotFoundException {
 		for (Media media : medias) {
 			if(media.getId() == idMedia) {
-				return true;
+				return media;
 			}
 		}
-		return false;
+		throw new MediaNotFoundException("média non trouvé:(");
 	}
 }
