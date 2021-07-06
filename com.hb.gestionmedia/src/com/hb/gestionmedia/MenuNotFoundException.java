@@ -1,6 +1,6 @@
 package com.hb.gestionmedia;
 
-public class MenuNotFoundException extends Exception {
+public class MenuNotFoundException extends RuntimeException {
 
 	/**
 	 * 

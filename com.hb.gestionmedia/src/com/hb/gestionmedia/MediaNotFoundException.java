@@ -1,6 +1,6 @@
 package com.hb.gestionmedia;
 
-public class MediaNotFoundException extends Exception {
+public class MediaNotFoundException extends RuntimeException {
 
 	/**
 	 * 

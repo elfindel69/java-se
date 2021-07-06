@@ -1,6 +1,6 @@
 package com.hb.gestionmedia;
 
-public class AdherentNotFoundException extends Exception {
+public class AdherentNotFoundException extends RuntimeException {
 
 	/**
 	 * 
