@@ -3,7 +3,6 @@ package com.hb.gestionmedia;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.Scanner;
-
 /**
  * classe main
  * @author elfindel69
@@ -77,7 +76,7 @@ public class GestionMediathequeMain {
 		try {
 			nbPages = Integer.parseInt(sc.nextLine());
 		} catch (NumberFormatException e) {
-			System.err.println("Mauvaise saisie :(");
+			throw new NumberFormatException("Nombre de pages non saisi :(");
 		}
 		//setter du nombre de pages
 		livre.setNbPages(nbPages);
@@ -108,7 +107,7 @@ public class GestionMediathequeMain {
 		try {
 			nbVolumes = Integer.parseInt(sc.nextLine());
 		}catch (NumberFormatException e) {
-			System.err.println("Mauvaise saisie :(");
+			throw new NumberFormatException("Nombre de volumes non saisi :(");
 		}
 		//setter nombre de volumes
 		encyclopedie.setNbVolumes(nbVolumes);
@@ -139,7 +138,7 @@ public class GestionMediathequeMain {
 		try {
 			duree = Integer.parseInt(sc.nextLine());
 		}catch (NumberFormatException e) {
-			System.err.println("Mauvaise saisie :(");
+			throw new NumberFormatException("durée non saisie :(");
 		}
 		//setter durée
 		dvd.setDuree(duree);
@@ -175,7 +174,7 @@ public class GestionMediathequeMain {
 		try {
 			nbPistes = Integer.parseInt(sc.nextLine());
 		} catch (NumberFormatException e) {
-			System.err.println("Mauvaise saisie :(");
+			throw new NumberFormatException("Nombre de pistes non saisi :(");
 		}
 		//setter nombre de pistes
 		cd.setNbPistes(nbPistes);
@@ -299,34 +298,30 @@ public class GestionMediathequeMain {
 	 * menu de gestion de la médithèque
 	 */
 	public static void menuMediatheque() {
-		
-		char quit = 'n';
+		int choice = 10;
 		
 		do {
 			afficherMenu();
 			try {
-				doMenu();
+				choice = doMenu();
 			}catch (MenuNotFoundException e) {
 				System.err.println(e.getMessage());
 			}
 			
-			//saisie menu continuer?
-			System.out.println("voulez vous continuer? (y/n)");
-			quit = sc.nextLine().charAt(0);
-			quit = Character.toLowerCase(quit);
-		}while(quit != 'n');
+		}while(choice != 10);
 	}
 
 	/**
 	 * méthode de choix du menu
+	 * @return 
 	 * @throws MenuNotFoundException menu non trouvé
 	 */
-	private static void doMenu() throws MenuNotFoundException {
+	private static int doMenu() throws MenuNotFoundException {
 		int choice  = 0;
 		//test choix menu
 		try {
 			//saisie choix
-			System.out.println("saisir un nombre (1-9): ");
+			System.out.println("saisir un nombre (1-10): ");
 			choice = Integer.parseInt(sc.nextLine());
 		} catch (Exception e) {
 			System.err.println("mauvaise saisie :(");
@@ -349,22 +344,39 @@ public class GestionMediathequeMain {
 		}
 		case 4: {
 			System.out.println("Ajout d'un livre: ");
-			creerLivre();
+			try {
+				creerLivre();
+			}catch (NumberFormatException e) {
+				System.err.println(e.getMessage());
+			}
+			
 			break;
 		}
 		case 5: {
 			System.out.println("Ajout d'un CD: ");
-			creerCD();
+			try {
+				creerCD();
+			}catch (NumberFormatException e) {
+				System.err.println(e.getMessage());
+			}
 			break;
 		}
 		case 6: {
 			System.out.println("Ajout d'un DVD: ");
-			creerDVD();
+			try {
+				creerDVD();
+			}catch (NumberFormatException e) {
+				System.err.println(e.getMessage());
+			}
 			break;
 		}
 		case 7: {
 			System.out.println("Ajout d'une encyclopédie: ");
-			creerEncyclopedie();
+			try {
+				creerEncyclopedie();
+			}catch (NumberFormatException e) {
+				System.err.println(e.getMessage());
+			}
 			break;
 		}
 		case 8: {
@@ -383,9 +395,13 @@ public class GestionMediathequeMain {
 			}
 			break;
 		}
+		case 10:{
+			return 10;
+		}
 		default:
 			throw new MenuNotFoundException("mauvais choix :(");
 		}
+		return choice;
 	}
 
 	/**
@@ -403,6 +419,8 @@ public class GestionMediathequeMain {
 		System.out.println("7. Créer une encyclopédie");
 		System.out.println("8. Créer un adhérent");
 		System.out.println("9. Créer un emprunt");
+		System.out.println("######");
+		System.out.println("10: Quitter");
 	}
 	
 	
