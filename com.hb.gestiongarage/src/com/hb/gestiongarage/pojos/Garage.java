@@ -127,7 +127,7 @@ public class Garage {
 
 	/**
 	 * removes the vehicle from the list
-	 * @param id2
+	 * @param id id to remove
 	 */
 	public boolean removeVehicle(int id) {
 		for (Vehicle vehicle : vehicles) {
@@ -137,6 +137,5 @@ public class Garage {
 			}
 		}
 		return false;
-		
 	}
 }

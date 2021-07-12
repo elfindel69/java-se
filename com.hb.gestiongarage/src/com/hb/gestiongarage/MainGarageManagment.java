@@ -64,16 +64,17 @@ public class MainGarageManagment {
 			System.out.println("2. Afficher les Vehicules");
 			System.out.println("3. Afficher les Moteurs");
 			System.out.println("4. Afficher les Options");
-			System.out.println("5. Ajouter un Garage");
-			System.out.println("6. Ajouter une Voiture");
-			System.out.println("7. Ajouter une Moto");
-			System.out.println("8. Ajouter un Camion");
-			System.out.println("9. Ajouter une Option");
-			System.out.println("10. Trier les Véhicules");
-			System.out.println("11. Supprimer un Garage");
-			System.out.println("12. Supprimer un Vehicule");
-			System.out.println("13. Supprimer un Moteur");
-			System.out.println("14. Supprimer une Option");
+			System.out.println("5. Afficher les Marques");
+			System.out.println("6. Ajouter un Garage");
+			System.out.println("7. Ajouter une Voiture");
+			System.out.println("8. Ajouter une Moto");
+			System.out.println("9. Ajouter un Camion");
+			System.out.println("10. Ajouter une Option");
+			System.out.println("11. Trier les Véhicules");
+			System.out.println("12. Supprimer un Garage");
+			System.out.println("13. Supprimer un Vehicule");
+			System.out.println("14. Supprimer un Moteur");
+			System.out.println("15. Supprimer une Option");
 			//gets menu option
 			int menu = 0;
 			try {
@@ -102,10 +103,14 @@ public class MainGarageManagment {
 				showOptions();
 				break;	
 			case 5:
+				//shows all the brands
+				showBrands();
+				break;	
+			case 6:
 				//creates a garage
 				createGarage();
 				break;
-			case 6:
+			case 7:
 				//creates a car
 				try {
 					createCar();
@@ -113,7 +118,7 @@ public class MainGarageManagment {
 					System.out.println("erreur de saisie: "+e.getMessage());
 				}
 				break;
-			case 7:
+			case 8:
 				//creates a motorcycle
 				try {
 					createMotorcycle();
@@ -121,7 +126,7 @@ public class MainGarageManagment {
 					System.out.println("erreur de saisie: "+e.getMessage());
 				}
 				break;
-			case 8:
+			case 9:
 				//creates a truck
 				try {
 					createTruck();
@@ -129,7 +134,7 @@ public class MainGarageManagment {
 					System.out.println("erreur de saisie: "+e.getMessage());
 				}
 				break;
-			case 9:
+			case 10:
 				//creates an option
 				try {
 					createOption();
@@ -137,23 +142,23 @@ public class MainGarageManagment {
 					System.out.println("erreur de saisie: "+e.getMessage());
 				}
 				break;
-			case 10:
+			case 11:
 				//sorts vehicles by price
 				sortVehicles();
 				break;
-			case 11:
+			case 12:
 				//deletes a garage
 				deleteGarage();
 				break;
-			case 12:
+			case 13:
 				//deletes a vehicle
 				deleteVehicle();
 				break;
-			case 13:
+			case 14:
 				//deletes an engine
 				deleteEngine();
 				break;
-			case 14:
+			case 15:
 			//deletes an option
 			deleteOption();
 			break;
@@ -164,6 +169,14 @@ public class MainGarageManagment {
 			doContinue = sc.nextLine().charAt(0);
 			
 		}while(doContinue != 'n');
+	}
+
+	private static void showBrands() {
+		//show the brands
+		System.out.println("liste de marques:");
+		for (Brand brand : Brand.values()) {
+			System.out.println(brand);
+		}
 	}
 
 	/**
@@ -360,6 +373,14 @@ public class MainGarageManagment {
 		double price = Double.parseDouble(sc.nextLine());
 		truck.setPrice(price);
 		
+		//shows the brands
+		showBrands();
+		
+		//gets a brand
+		System.out.println("Saisir une marque: ");
+		String brand = sc.nextLine();
+		truck.setBrand(Brand.valueOf(brand));
+		
 		//gets the engine
 		Engine engine = getEngine();
 		
@@ -387,7 +408,7 @@ public class MainGarageManagment {
 		int cargoWeight = Integer.parseInt(sc.nextLine());
 		truck.setCargoWeight(cargoWeight);
 		
-		//stes the options
+		//sets the options
 		addOptions(truck);
 		
 		//sets the truck
@@ -416,6 +437,14 @@ public class MainGarageManagment {
 		System.out.println("Saisir un prix: ");
 		double price = Double.parseDouble(sc.nextLine());
 		motorcycle.setPrice(price);
+		
+		//shows the brands
+		showBrands();
+		
+		//gets a brand
+		System.out.println("Saisir une marque: ");
+		String brand = sc.nextLine();
+		motorcycle.setBrand(Brand.valueOf(brand));
 		
 		//gets the engine
 		Engine engine = getEngine();
@@ -498,6 +527,14 @@ public class MainGarageManagment {
 		System.out.println("Saisir un prix: ");
 		double price = Double.parseDouble(sc.nextLine());
 		car.setPrice(price);
+		
+		//shows the brands
+		showBrands();
+		
+		//gets a brand
+		System.out.println("Saisir une marque: ");
+		String brand = sc.nextLine();
+		car.setBrand(Brand.valueOf(brand));
 		
 		//gets an engine
 		Engine engine = getEngine();
@@ -618,7 +655,7 @@ public class MainGarageManagment {
 		//motorcycle creation
 		Engine engine3 = new Engine(EngineType.Gas, 500);
 		engineService.addEngine(engine3);
-		Motorcycle m1 = new Motorcycle("Suzuki 3", 5000.0, Brand.Suzuki,engine3 , LocalDate.parse("2021-07-09"), 500);
+		Motorcycle m1 = new Motorcycle("Suzuki 3", 5000.0, Brand.Suzuki,engine3, LocalDate.parse("2021-07-09"), 500);
 		VehicleOption op3 = new VehicleOption("heated seat",500);
 		optionService.addVehicleOption(op3);
 		m1.addOption(op3);
