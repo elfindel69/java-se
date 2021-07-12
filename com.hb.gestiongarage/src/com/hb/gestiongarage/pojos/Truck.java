@@ -54,7 +54,8 @@ public class Truck extends Vehicle {
 				",\n cargoWeight=" + cargoWeight + ",\n cargoVolume=" + cargoVolume + "]";
 	}
 	
-	public void showTruck() {
+	@Override
+	public void showVehicle() {
 		super.showVehicle();
 		System.out.println(this);
 	}

@@ -137,18 +137,7 @@ public class MainGarageManagment {
 	private static void showVehicles() {
 		System.out.println("Liste des Véhicules");
 		for(Vehicle vehicle : vehicleService.getVehicles()) {
-			if(vehicle instanceof Car) {
-				Car car = (Car) vehicle;
-				car.showCar();
-			}
-			if(vehicle instanceof Motorcycle) {
-				Motorcycle motorcycle = (Motorcycle) vehicle;
-				motorcycle.showMotorcycle();
-			}
-			if(vehicle instanceof Truck) {
-				Truck truck = (Truck) vehicle;
-				truck.showTruck();
-			}
+			vehicle.showVehicle();
 		}
 	}
 

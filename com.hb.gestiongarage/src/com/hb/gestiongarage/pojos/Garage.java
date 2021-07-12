@@ -25,8 +25,9 @@ public class Garage {
 		return id;
 	}
 	public Garage() {
-		id = ++sId;
+		id = generateId();
 	}
+	
 	
 	public Garage(String name) {
 		this.name = name;
@@ -49,5 +50,9 @@ public class Garage {
 	public void sortVehicles() {
 		Collections.sort(vehicles);
 		
+	}
+	
+	private static int generateId() {
+		return ++sId;
 	}
 }

@@ -29,8 +29,9 @@ public class Engine {
 	
 	
 	public Engine() {
-		this.id = ++sId;
+		this.id = generateId();
 	}
+	
 	public Engine(EngineType engineType, int horsePower) {
 		this();
 		this.engineType = engineType;
@@ -45,5 +46,8 @@ public class Engine {
 		
 	}
 	
+	private static int generateId() {
+		return ++sId;
+	}
 	
 }

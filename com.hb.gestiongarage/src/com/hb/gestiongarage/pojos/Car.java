@@ -70,7 +70,8 @@ public class Car extends Vehicle {
 		return horsePower*10;
 	}
 
-	public void showCar() {
+	@Override
+	public void showVehicle() {
 		super.showVehicle();
 		System.out.println(this);
 	}

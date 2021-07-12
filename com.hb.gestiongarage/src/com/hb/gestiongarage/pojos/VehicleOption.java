@@ -26,8 +26,9 @@ public class VehicleOption {
 	}
 	
 	public VehicleOption() {
-		this.id = ++sId;
+		this.id = generateId();
 	}
+	
 	public VehicleOption(String name, double price) {
 		this();
 		this.name = name;
@@ -43,5 +44,7 @@ public class VehicleOption {
 		System.out.println(this);
 	}
 	
-	
+	private static int generateId() {
+		return ++sId;
+	}
 }

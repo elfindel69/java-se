@@ -34,7 +34,8 @@ public class Motorcycle extends Vehicle {
 		return "Motorcycle: "+super.toString()+"\n cylinders=" + cylinders + "]";
 	}
 	
-	public void showMotorcycle() {
+	@Override
+	public void showVehicle() {
 		super.showVehicle();
 		System.out.println(this);
 	}

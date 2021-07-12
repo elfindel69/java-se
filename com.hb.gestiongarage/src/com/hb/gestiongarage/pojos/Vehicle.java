@@ -64,8 +64,9 @@ public abstract class Vehicle implements Comparable<Vehicle> {
 		this.immatriculationDate = immatriculationDate;
 	}
 	public Vehicle() {
-		id = ++sId;
+		id = generateId();
 	}
+	
 	
 	public Vehicle(String name, double price, Brand brand, Engine engine, LocalDate immDate) {
 		this();
@@ -111,6 +112,10 @@ public abstract class Vehicle implements Comparable<Vehicle> {
 	
 	public void showVehicle() {
 		System.out.println(this);
+	}
+	
+	private static int generateId() {
+		return ++sId;
 	}
 	
 }
