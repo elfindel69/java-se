@@ -21,19 +21,45 @@ import com.hb.gestiongarage.service.impl.GarageServiceImpl;
 import com.hb.gestiongarage.service.impl.VehicleOptionServiceImpl;
 import com.hb.gestiongarage.service.impl.VehicleServiceImpl;
 
+/**
+ * main class, manages POJOs
+ * @author elfindel69
+ *
+ */
 public class MainGarageManagment {
-	
+	/**
+	 * manager of VehicleOptions
+	 */
 	private static VehicleOptionService optionService = new VehicleOptionServiceImpl();
+	
+	/**
+	 * manager of Garages
+	 */
 	private static GarageService garageService = new GarageServiceImpl();
+	
+	/**
+	 * manager of Vehicles
+	 */
 	private static VehicleService vehicleService = new VehicleServiceImpl();
+	
+	/**
+	 * manager of Engines
+	 */
 	private static EngineService engineService = new EngineServiceImpl();
 	
+	/**
+	 * scanner, reads keyboard entries
+	 */
 	private static Scanner sc = new Scanner(System.in);
 	
+	/**
+	 * console menu for POJOs
+	 */
 	public static void garageMenu() {
 		char doContinue = 'y';
 		
 		do {
+			//shows menu options
 			System.out.println("1. Afficher les Garages");
 			System.out.println("2. Afficher les Vehicules");
 			System.out.println("3. Afficher les Moteurs");
@@ -44,6 +70,7 @@ public class MainGarageManagment {
 			System.out.println("8. Ajouter un Camion");
 			System.out.println("9. Ajouter une Option");
 			System.out.println("10. Trier les Véhicules");
+			//gets menu option
 			int menu = 0;
 			try {
 				System.out.println("saisir un menu: ");
@@ -51,23 +78,31 @@ public class MainGarageManagment {
 			}catch (Exception e) {
 				System.out.println("erreur de saisie: "+e.getMessage());
 			}
+			
+			//menu choices
 			switch(menu) {
 			case 1:
+				//shows garages with vehicles
 				showGaragesFull();
 				break;
 			case 2:
+				//shows all the vehicles
 				showVehicles();
 				break;	
 			case 3:
+				//shows all the engines
 				showEngines();
 				break;	
 			case 4:
+				//shows all the options
 				showOptions();
 				break;	
 			case 5:
+				//creates a garage
 				createGarage();
 				break;
 			case 6:
+				//creates a car
 				try {
 					createCar();
 				}catch (Exception e) {
@@ -75,6 +110,7 @@ public class MainGarageManagment {
 				}
 				break;
 			case 7:
+				//creates a motorcycle
 				try {
 					createMotorcycle();
 				}catch (Exception e) {
@@ -82,6 +118,7 @@ public class MainGarageManagment {
 				}
 				break;
 			case 8:
+				//creates a truck
 				try {
 					createTruck();
 				}catch (Exception e) {
@@ -89,6 +126,7 @@ public class MainGarageManagment {
 				}
 				break;
 			case 9:
+				//creates an option
 				try {
 					createOption();
 				}catch (Exception e) {
@@ -96,29 +134,41 @@ public class MainGarageManagment {
 				}
 				break;
 			case 10:
+				//sorts vehicles by price
 				sortVehicles();
 				break;
 			}
+			//gets if the user wants to continue
 			System.out.println("Continuer? (y/n)");
 			doContinue = sc.nextLine().charAt(0);
 			
 		}while(doContinue != 'n');
 	}
 
+	/**
+	 * option creation method
+	 */
 	private static void createOption() {
 		System.out.println("Création d'Option: ");
+		//creates the option
 		VehicleOption option = new VehicleOption();
+		//gets the name
 		System.out.println("Saisir un nom:");
 		String name = sc.nextLine();
 		option.setName(name);
 		
+		//gets the price
 		System.out.println("Saisir un prix:");
 		double price = Double.parseDouble(sc.nextLine());
 		option.setPrice(price);
 		
+		//adds the option to the manager
 		optionService.addVehicleOption(option);
 	}
 
+	/**
+	 * show options method
+	 */
 	private static void showOptions() {
 		System.out.println("Liste des Options");
 		for(VehicleOption vehicleOption : optionService.getVehicleOptions()) {
@@ -126,7 +176,10 @@ public class MainGarageManagment {
 		}
 		
 	}
-
+	
+	/**
+	 * show engines method
+	 */
 	private static void showEngines() {
 		System.out.println("Liste des Moteurs");
 		for(Engine engine : engineService.getEngines()) {
@@ -134,6 +187,9 @@ public class MainGarageManagment {
 		}
 	}
 
+	/**
+	 * show vehicles method
+	 */
 	private static void showVehicles() {
 		System.out.println("Liste des Véhicules");
 		for(Vehicle vehicle : vehicleService.getVehicles()) {
@@ -141,6 +197,9 @@ public class MainGarageManagment {
 		}
 	}
 
+	/**
+	 * show garages with vehicles method
+	 */
 	private static void showGaragesFull() {
 		for(Garage garage : garageService.getGarages()) {
 			garage.showGarage();
@@ -148,193 +207,251 @@ public class MainGarageManagment {
 		}
 	}
 
+	/**
+	 * method to sort vehicles by price
+	 */
 	private static void sortVehicles() {
+		//shows garages list
 		System.out.println("liste des garages");
 		for(Garage garage : garageService.getGarages()) {
 			garage.showGarage();
 		}
+		//gets a garage
 		System.out.println("saisir un id:");
 		int id = Integer.parseInt(sc.nextLine());
 		Garage garage = garageService.getGarage(id);
+		
+		//sorts the vehicles by price
 		garage.sortVehicles();
 		System.out.println("liste triée par prix");
 	}
 
+	/**
+	 * truck creation method
+	 */
 	private static void createTruck() {
 		System.out.println("Création de camion: ");
+		//truck object
 		Truck truck = new Truck();
-		System.out.println("liste des garages");
-		for(Garage garage : garageService.getGarages()) {
-			garage.showGarage();
-		}
-		System.out.println("saisir un id:");
-		int id = Integer.parseInt(sc.nextLine());
-		Garage garage = garageService.getGarage(id);
 		
+		//gets a garage
+		Garage garage = getGarage();
+		
+		//gets a name
 		System.out.println("Saisir un nom: ");
 		String name = sc.nextLine();
 		truck.setName(name);
 		
+		//gets a price
 		System.out.println("Saisir un prix: ");
 		double price = Double.parseDouble(sc.nextLine());
 		truck.setPrice(price);
 		
-		System.out.println("liste de moteurs:");
-		for (EngineType engineType : EngineType.values()) {
-			System.out.println(engineType);
-		}
-		System.out.println("Saisir un type de moteur:");
-		String engineTypeString = sc.nextLine();
+		//gets the engine
+		Engine engine = getEngine();
 		
-		System.out.println("Saisir une puissance de moteur:");
-		int enginePower = Integer.parseInt(sc.nextLine());
-		
-		Engine engine = new Engine(EngineType.valueOf(engineTypeString), enginePower);
+		//sets the engine
 		engineService.addEngine(engine);
 		truck.setEngine(engine);
-		
+
+		//gets a registration date
 		System.out.println("Saisir une date d'immatriculation:");
-		LocalDate immDate = LocalDate.parse(sc.nextLine());
-		truck.setImmatriculationDate(immDate);
+		LocalDate registrationDate = LocalDate.parse(sc.nextLine());
+		truck.setRegistrationDate(registrationDate);
 		
+		//gets an axles number
 		System.out.println("Saisir un nombre d'essieux:");
 		int nbAxles = Integer.parseInt(sc.nextLine());
 		truck.setNbAxles(nbAxles);
 		
+		//gets a cargo volume
 		System.out.println("Saisir un volume de chargement:");
 		int cargoVolume = Integer.parseInt(sc.nextLine());
 		truck.setCargoVolume(cargoVolume);
 		
+		//gets a cargo weight
 		System.out.println("Saisir un poids de chargement:");
 		int cargoWeight = Integer.parseInt(sc.nextLine());
 		truck.setCargoWeight(cargoWeight);
 		
+		//stes the options
 		addOptions(truck);
 		
+		//sets the truck
 		garage.addVehicle(truck);
 		vehicleService.addVehicle(truck);
 		
 	}
 
+	/**
+	 * motorcycle creation method
+	 */
 	private static void createMotorcycle() {
 		System.out.println("Création de moto: ");
+		//motorcycle object
 		Motorcycle motorcycle = new Motorcycle();
-		System.out.println("liste des garages");
-		for(Garage garage : garageService.getGarages()) {
-			garage.showGarage();
-		}
-		System.out.println("saisir un id:");
-		int id = Integer.parseInt(sc.nextLine());
-		Garage garage = garageService.getGarage(id);
 		
+		//gets a garage 
+		Garage garage = getGarage();
+		
+		//gets a name
 		System.out.println("Saisir un nom: ");
 		String name = sc.nextLine();
 		motorcycle.setName(name);
 		
+		//gets a price
 		System.out.println("Saisir un prix: ");
 		double price = Double.parseDouble(sc.nextLine());
 		motorcycle.setPrice(price);
 		
-		System.out.println("liste de moteurs:");
-		for (EngineType engineType : EngineType.values()) {
-			System.out.println(engineType);
-		}
-		System.out.println("Saisir un type de moteur:");
-		String engineTypeString = sc.nextLine();
+		//gets the engine
+		Engine engine = getEngine();
 		
-		System.out.println("Saisir une puissance de moteur:");
-		int enginePower = Integer.parseInt(sc.nextLine());
-		
-		Engine engine = new Engine(EngineType.valueOf(engineTypeString), enginePower);
+		//sets the engine
 		engineService.addEngine(engine);
 		motorcycle.setEngine(engine);
 		
+		//gets a registration date
 		System.out.println("Saisir une date d'immatriculation:");
-		LocalDate immDate = LocalDate.parse(sc.nextLine());
-		motorcycle.setImmatriculationDate(immDate);
+		LocalDate registrationDate = LocalDate.parse(sc.nextLine());
+		motorcycle.setRegistrationDate(registrationDate);
 		
+		//gets the cylinders
 		System.out.println("Saisir une cylindrée:");
 		int cylinders = Integer.parseInt(sc.nextLine());
 		motorcycle.setCylinders(cylinders);
 		
+		//gets the options
 		addOptions(motorcycle);
 		
+		//sets the motorcycle
 		garage.addVehicle(motorcycle);
 		vehicleService.addVehicle(motorcycle);
 		
 	}
 
-	private static void createCar() {
-		System.out.println("Création de voiture: ");
-		Car car = new Car();
-		System.out.println("liste des garages");
-		for(Garage garage : garageService.getGarages()) {
-			garage.showGarage();
-		}
-		System.out.println("saisir un id:");
-		int id = Integer.parseInt(sc.nextLine());
-		Garage garage = garageService.getGarage(id);
-		
-		System.out.println("Saisir un nom: ");
-		String name = sc.nextLine();
-		car.setName(name);
-		
-		System.out.println("Saisir un prix: ");
-		double price = Double.parseDouble(sc.nextLine());
-		car.setPrice(price);
-		
+	/**
+	 * engine selection method
+	 * @return selected engine
+	 */
+	private static Engine getEngine() {
+		//shows the engine types list
 		System.out.println("liste de moteurs:");
 		for (EngineType engineType : EngineType.values()) {
 			System.out.println(engineType);
 		}
+		//gets an engine type
 		System.out.println("Saisir un type de moteur:");
 		String engineTypeString = sc.nextLine();
-		
+		//gets an engine power
 		System.out.println("Saisir une puissance de moteur:");
 		int enginePower = Integer.parseInt(sc.nextLine());
 		
+		//sets the engine
 		Engine engine = new Engine(EngineType.valueOf(engineTypeString), enginePower);
+		return engine;
+	}
+
+	/**
+	 * garage selection method
+	 * @return selected garage
+	 */
+	private static Garage getGarage() {
+		//shows the garages list
+		System.out.println("liste des garages");
+		for(Garage garage : garageService.getGarages()) {
+			garage.showGarage();
+		}
+		//gets a garage
+		System.out.println("saisir un id:");
+		int id = Integer.parseInt(sc.nextLine());
+		Garage garage = garageService.getGarage(id);
+		return garage;
+	}
+
+	/**
+	 * car creation method
+	 */
+	private static void createCar() {
+		System.out.println("Création de voiture: ");
+		//car object
+		Car car = new Car();
+		
+		//garage selection
+		Garage garage = getGarage();
+		
+		//gets a name
+		System.out.println("Saisir un nom: ");
+		String name = sc.nextLine();
+		car.setName(name);
+		
+		//gets a price
+		System.out.println("Saisir un prix: ");
+		double price = Double.parseDouble(sc.nextLine());
+		car.setPrice(price);
+		
+		//gets an engine
+		Engine engine = getEngine();
+		
+		//sets the engine
 		engineService.addEngine(engine);
 		car.setEngine(engine);
 		
+		
+		//gets a registration date
 		System.out.println("Saisir une date d'immatriculation:");
-		LocalDate immDate = LocalDate.parse(sc.nextLine());
-		car.setImmatriculationDate(immDate);
+		LocalDate registrationDate = LocalDate.parse(sc.nextLine());
+		car.setRegistrationDate(registrationDate);
 		
+		//gets a fiscal power
 		System.out.println("Saisir une puissance en chevaux fiscaux:");
-		int horsePower = Integer.parseInt(sc.nextLine());
-		car.setHorsePower(horsePower);
+		int fiscalPower = Integer.parseInt(sc.nextLine());
+		car.setFiscalPower(fiscalPower);
 		
+		//gets the number of doors
 		System.out.println("Saisir un nombre de portes:");
 		int nbDoors = Integer.parseInt(sc.nextLine());
 		car.setNbDoors(nbDoors);
 		
+		//gets the number of seats
 		System.out.println("Saisir un nombre de sièges:");
 		int nbSeats = Integer.parseInt(sc.nextLine());
 		car.setNbSeats(nbSeats);
 		
-		System.out.println("Saisir une taille de coffre:");
+		//gets the booth size (L)
+		System.out.println("Saisir une taille de coffre (L):");
 		int boothSize = Integer.parseInt(sc.nextLine());
 		car.setBoothSize(boothSize);
 		
+		//gets the options
 		addOptions(car);
 		
+		//sets the car
 		garage.addVehicle(car);
 		vehicleService.addVehicle(car);
 	}
 
+	/**
+	 * options selection method
+	 * @param vehicle Vehicle to set
+	 */
 	private static void addOptions(Vehicle vehicle) {
 		System.out.println("ajouter des Options:");
+		//add options loop
 		char doContinue = 'y';
 		while(doContinue != 'n'){
+			//continue?
 			System.out.println("ajouter une option? (y/n)");
 			doContinue = sc.nextLine().charAt(0);
+			//if we continue
 			if(doContinue != 'n') {
 				System.out.println("Choisir une option: ");
+				//gets the options list
 				System.out.println("liste des options");
 				for(VehicleOption option : optionService.getVehicleOptions()) {
 					option.showOption();
 				}
+				//sets an option
 				int optionId = Integer.parseInt(sc.nextLine());
 				VehicleOption option = optionService.getVehicleOption(optionId);
 				vehicle.addOption(option);
@@ -342,19 +459,31 @@ public class MainGarageManagment {
 		}
 	}
 
+	/**
+	 * garage creation method
+	 */
 	private static void createGarage() {
 		System.out.println("Création de garage:");
+		//garage object
 		Garage garage = new Garage();
+		//gets the name
 		System.out.println("saisir un nom:");
 		String name = sc.nextLine();
 		garage.setName(name);
 		
+		//sets the object
 		garageService.addGarage(garage);
 	}
 
+	/**
+	 * main method
+	 * @param args program arguments
+	 */
 	public static void main(String[] args) {
+		//garage creation
 		Garage garage = new Garage("Garage Isidore");
 		garageService.addGarage(garage);
+		//car creation 
 		Engine engine1 = new Engine(EngineType.Oil, 100);
 		Car car1 = new Car("Clio 3", 3000.0, Brand.Renault, engine1, LocalDate.parse("2021-07-09"), 200, 5, 5, 20);
 		engineService.addEngine(engine1);
@@ -369,6 +498,7 @@ public class MainGarageManagment {
 		System.out.println(car1);
 		System.out.println("Taxes: "+car1.calcTaxes());
 		
+		//truck creation
 		Engine engine2 = new Engine(EngineType.Gas, 1000);
 		engineService.addEngine(engine2);
 		Truck truck1 = new Truck("MAN", 15000, Brand.MAN,engine2 , LocalDate.parse("2021-07-09"), 3,50, 100);
@@ -379,6 +509,7 @@ public class MainGarageManagment {
 		System.out.println(truck1);
 		System.out.println("Taxes: "+truck1.calcTaxes());
 		
+		//motorcycle creation
 		Engine engine3 = new Engine(EngineType.Gas, 500);
 		engineService.addEngine(engine3);
 		Motorcycle m1 = new Motorcycle("Suzuki 3", 5000.0, Brand.Suzuki,engine3 , LocalDate.parse("2021-07-09"), 500);
@@ -390,6 +521,7 @@ public class MainGarageManagment {
 		System.out.println(m1);
 		System.out.println("Taxes: "+m1.calcTaxes());
 		
+		//console menu
 		garageMenu();
 		
 	}
