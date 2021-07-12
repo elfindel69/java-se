@@ -61,7 +61,7 @@ public class EngineServiceImpl implements EngineService {
 	public boolean removeEngine(int id) {
 		for (Engine engine : engines) {
 			if(engine.getId() == id) {
-				engines.remove(id);
+				engines.remove(engine);
 				return true;
 			}
 		}

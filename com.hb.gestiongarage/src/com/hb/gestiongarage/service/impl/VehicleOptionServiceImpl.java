@@ -60,7 +60,7 @@ public class VehicleOptionServiceImpl implements VehicleOptionService {
 	public boolean removeOption(int id) {
 		for (VehicleOption vehicleOption : options) {
 			if(vehicleOption.getId() == id) {
-				options.remove(id);
+				options.remove(vehicleOption);
 				return true;
 			}
 		}

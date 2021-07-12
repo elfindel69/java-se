@@ -70,6 +70,10 @@ public class MainGarageManagment {
 			System.out.println("8. Ajouter un Camion");
 			System.out.println("9. Ajouter une Option");
 			System.out.println("10. Trier les Véhicules");
+			System.out.println("11. Supprimer un Garage");
+			System.out.println("12. Supprimer un Vehicule");
+			System.out.println("13. Supprimer un Moteur");
+			System.out.println("14. Supprimer une Option");
 			//gets menu option
 			int menu = 0;
 			try {
@@ -137,12 +141,114 @@ public class MainGarageManagment {
 				//sorts vehicles by price
 				sortVehicles();
 				break;
-			}
+			case 11:
+				//deletes a garage
+				deleteGarage();
+				break;
+			case 12:
+				//deletes a vehicle
+				deleteVehicle();
+				break;
+			case 13:
+				//deletes an engine
+				deleteEngine();
+				break;
+			case 14:
+			//deletes an option
+			deleteOption();
+			break;
+		}
+			
 			//gets if the user wants to continue
 			System.out.println("Continuer? (y/n)");
 			doContinue = sc.nextLine().charAt(0);
 			
 		}while(doContinue != 'n');
+	}
+
+	/**
+	 * deletes an option
+	 */
+	private static void deleteOption() {
+		//shows the list of garages
+		showOptions();
+		
+		//gets the option to remove
+		int id = Integer.parseInt(sc.nextLine());
+		
+		//remove the option
+		boolean res = optionService.removeOption(id);
+		if(res) {
+			System.out.println("option supprimée");
+		}else {
+			System.out.println("l'option avec l'id "+id+" n'existe pas");
+		}
+		
+	}
+
+	/**
+	 * deletes an engine
+	 */
+	private static void deleteEngine() {
+		//shows the list of garages
+		showEngines();
+		
+		//gets the engine to remove
+		System.out.println("entrer un id:");
+		int id = Integer.parseInt(sc.nextLine());
+		
+		//remove the engine
+		boolean res = engineService.removeEngine(id);
+		if(res) {
+			System.out.println("moteur supprimé");
+		}else {
+			System.out.println("le moteur avec l'id "+id+" n'existe pas");
+		}
+		
+	}
+
+	/**
+	 * deletes a garage
+	 */
+	private static void deleteGarage() {
+		//shows the list of garages
+		showGarageNames();
+		
+		//gets the garage to remove
+		System.out.println("entrer un id:");
+		int id = Integer.parseInt(sc.nextLine());
+		
+		//remove the garage
+		boolean res = garageService.removeGarage(id);
+		if(res) {
+			System.out.println("garage supprimé");
+		}else {
+			System.out.println("le garage avec l'id "+id+" n'existe pas");
+		}
+		
+	}
+
+	/**
+	 * deletes a vehicle
+	 */
+	private static void deleteVehicle() {
+		//gets a garage
+		Garage garage = getGarage();
+		
+		//gets the vehicles
+		garage.showVehicles();
+		//get the vehicle to remove
+		System.out.println("entrer un id:");
+		int id = Integer.parseInt(sc.nextLine());
+		
+		//remove the vehicle
+		boolean res = garage.removeVehicle(id);
+		boolean res2 = vehicleService.removeVehicle(id);
+		if(res&&res2) {
+			System.out.println("véhicule supprimé");
+		}else {
+			System.out.println("le véhicule avec l'id "+id+" n'existe pas");
+		}
 	}
 
 	/**
@@ -212,10 +318,7 @@ public class MainGarageManagment {
 	 */
 	private static void sortVehicles() {
 		//shows garages list
-		System.out.println("liste des garages");
-		for(Garage garage : garageService.getGarages()) {
-			garage.showGarage();
-		}
+		showGarageNames();
 		//gets a garage
 		System.out.println("saisir un id:");
 		int id = Integer.parseInt(sc.nextLine());
@@ -224,6 +327,16 @@ public class MainGarageManagment {
 		//sorts the vehicles by price
 		garage.sortVehicles();
 		System.out.println("liste triée par prix");
+	}
+
+	/**
+	 * shows garage names
+	 */
+	private static void showGarageNames() {
+		System.out.println("liste des garages");
+		for(Garage garage : garageService.getGarages()) {
+			garage.showGarage();
+		}
 	}
 
 	/**
@@ -336,7 +449,7 @@ public class MainGarageManagment {
 	 */
 	private static Engine getEngine() {
 		//shows the engine types list
-		System.out.println("liste de moteurs:");
+		System.out.println("liste de types de moteur:");
 		for (EngineType engineType : EngineType.values()) {
 			System.out.println(engineType);
 		}
@@ -357,11 +470,7 @@ public class MainGarageManagment {
 	 * @return selected garage
 	 */
 	private static Garage getGarage() {
-		//shows the garages list
-		System.out.println("liste des garages");
-		for(Garage garage : garageService.getGarages()) {
-			garage.showGarage();
-		}
+		showGarageNames();
 		//gets a garage
 		System.out.println("saisir un id:");
 		int id = Integer.parseInt(sc.nextLine());
@@ -447,10 +556,7 @@ public class MainGarageManagment {
 			if(doContinue != 'n') {
 				System.out.println("Choisir une option: ");
 				//gets the options list
-				System.out.println("liste des options");
-				for(VehicleOption option : optionService.getVehicleOptions()) {
-					option.showOption();
-				}
+				showOptions();
 				//sets an option
 				int optionId = Integer.parseInt(sc.nextLine());
 				VehicleOption option = optionService.getVehicleOption(optionId);

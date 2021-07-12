@@ -116,4 +116,27 @@ public class Garage {
 	private static int generateId() {
 		return ++sId;
 	}
+
+	/**
+	 * gets the garage vehicles list
+	 */
+	public List<Vehicle> getVehicles() {
+		return vehicles;
+		
+	}
+
+	/**
+	 * removes the vehicle from the list
+	 * @param id2
+	 */
+	public boolean removeVehicle(int id) {
+		for (Vehicle vehicle : vehicles) {
+			if(vehicle.getId() == id) {
+				vehicles.remove(vehicle);
+				return true;
+			}
+		}
+		return false;
+		
+	}
 }

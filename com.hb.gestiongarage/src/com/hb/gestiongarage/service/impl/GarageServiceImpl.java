@@ -61,7 +61,7 @@ public class GarageServiceImpl implements GarageService {
 	public boolean removeGarage(int id) {
 		for (Garage garage : garages) {
 			if(garage.getId() == id) {
-				garages.remove(id);
+				garages.remove(garage);
 				return true;
 			}
 		}

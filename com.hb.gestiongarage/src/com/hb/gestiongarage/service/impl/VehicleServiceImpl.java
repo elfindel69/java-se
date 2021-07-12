@@ -61,7 +61,7 @@ public class VehicleServiceImpl implements VehicleService {
 	public boolean removeVehicle(int id) {
 		for (Vehicle vehicle : vehicles) {
 			if(vehicle.getId() == id) {
-				vehicles.remove(id);
+				vehicles.remove(vehicle);
 				return true;
 			}
 		}
