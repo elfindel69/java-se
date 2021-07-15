@@ -4,8 +4,9 @@ public class Boomerang extends KartDecorator {
 
 	public Boomerang(Kart kart) {
 		super(kart);
-		kart.setName("Boomerang");
-		kart.setPrice(52);
+		this.setName(kart.getName()+", Boomerang");
+		this.setPrice(kart.getPrice()+2);
+		this.setRegistrationString(kart.getRegistrationString());
 	}
 	
 	

@@ -7,7 +7,6 @@ public class Participation {
 	private Client client;
 	private Kart kart;
 	private Repas repas;
-	private int fee = 50;
 	
 	public Participation() {
 		id = ++sId;
@@ -43,6 +42,7 @@ public class Participation {
 	public void setRepas(Repas repas) {
 		this.repas = repas;
 	}
+	
 
 	public int getId() {
 		return id;
@@ -50,7 +50,7 @@ public class Participation {
 
 	@Override
 	public String toString() {
-		return "Participation [id=" + id + ", client=" + client + ", kart=" + kart + ", repas=" + repas + ", fee=" + fee
+		return "Participation [id=" + id + ", client=" + client + ", kart=" + kart + ", repas=" + repas 
 				+ "]";
 	}
 	

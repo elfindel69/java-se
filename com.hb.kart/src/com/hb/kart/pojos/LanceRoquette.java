@@ -4,8 +4,9 @@ public class LanceRoquette extends KartDecorator {
 	
 	public LanceRoquette(Kart kart) {
 		super(kart);
-		kart.setName("Lance roquette");
-		kart.setPrice(54);
+		this.setName(kart.getName()+", Lance-roquette");
+		this.setPrice(kart.getPrice()+4);
+		this.setRegistrationString(kart.getRegistrationString());
 	}
 
 	

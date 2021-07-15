@@ -4,8 +4,9 @@ public class CarapaceTortue extends KartDecorator {
 
 	public CarapaceTortue(Kart kart) {
 		super(kart);
-		kart.setName("Carapace rouge");
-		kart.setPrice(53);
+		this.setName(kart.getName()+", Carapace rouge");
+		this.setPrice(kart.getPrice()+3);
+		this.setRegistrationString(kart.getRegistrationString());
 	}
 	
 	

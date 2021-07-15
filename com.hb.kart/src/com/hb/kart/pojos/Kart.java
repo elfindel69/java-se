@@ -1,8 +1,6 @@
 package com.hb.kart.pojos;
 
 public class Kart {
-	private static int sId = 0;
-	protected int id;
 	protected String registrationString;
 	protected String name;
 	protected int price;
@@ -31,22 +29,16 @@ public class Kart {
 		this.price = price;
 	}
 
-	public int getId() {
-		return id;
-	}
-	
-
 	public Kart() {
-		id = ++sId;
+		
 	}
 	
 	public Kart(String registrationString) {
-		this();
 		this.registrationString = registrationString;
 	}
 	@Override
 	public String toString() {
-		return "Kart [id=" + id + "\n,"+
+		return "Kart ["+
 				"registrationString=" + registrationString +",\n" 
 				+"name="+name+",\n"
 				+"price="+price+"]";
