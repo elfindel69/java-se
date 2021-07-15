@@ -109,9 +109,14 @@ public class KartMain {
 					builder.definirKart(kart);
 				}
 				
-				Repas repas = new Sushi("Sushi");
+				System.out.println("liste des repas");
+				for(Repas repasItem : repas ) {
+					System.out.println(repasItem);
+				}
+				int idRepas = saisirChoix("saisir un id de repas");
+				Repas repasItem = repas.get(idRepas - 1);
 				
-				builder.definirRepas(repas);
+				builder.definirRepas(repasItem);
 				Participation participation = builder.build();
 				participations.add(participation);
 				
